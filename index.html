@@ -7,145 +7,132 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(#e8ebf3, #ffffff);
-      color: #1a1a1a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(#eef2f7, #d6dbe3);
+      color: #222;
     }
     header {
-      background: #00388d;
+      background-color: #003b8f;
       color: white;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-    }
-    .toggle-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    .toggle-buttons button {
-      background: #e0e0e0;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .toggle-buttons button.active {
-      background: #007bff;
-      color: white;
-    }
-    .container {
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-    .iframe-wrapper {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       padding: 20px;
-      max-width: 1020px;
-      width: 90%;
       text-align: center;
+      font-size: 24px;
+      font-weight: bold;
     }
-    iframe.desktop-frame {
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .nav-button {
+      background-color: #e0e0e0;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .nav-button.active {
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+    }
+    .section {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    iframe.desktop-frame, iframe.mobile-frame {
       width: 970px;
       height: 250px;
       border: none;
-      border-radius: 8px;
+      border-radius: 15px;
+      display: block;
+      margin: auto;
     }
-    iframe.mobile-frame {
-      width: 320px;
-      height: 480px;
-      border: none;
-      border-radius: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      width: 90%;
-      max-width: 800px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      margin: 0 0 10px;
-      font-weight: bold;
-      color: #00388d;
-    }
-    p {
-      margin: 0;
-      font-size: 16px;
-    }
-    .phone-mockup {
-      background: url('https://i.imgur.com/lJ7Jk30.png') no-repeat center center;
-      background-size: contain;
+    .phone-frame {
+      position: relative;
       width: 360px;
       height: 720px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      margin: auto;
+    }
+    .phone-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .phone-screen {
+      position: absolute;
+      top: 70px;
+      left: 20px;
+      width: 320px;
+      height: 480px;
+      z-index: 2;
+      border: none;
+      overflow: hidden;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>TV+ Rich Media Sunumu</h1>
-    <div class="toggle-buttons">
-      <button id="desktopBtn" class="active">Desktop</button>
-      <button id="mobileBtn">Mobile</button>
-    </div>
-  </header>
 
-  <div class="container">
-    <div class="iframe-wrapper" id="iframeArea">
-      <iframe src="TVPlus/TVPlus.html" class="desktop-frame"></iframe>
-    </div>
+<header>TV+ Rich Media Sunumu</header>
 
-    <div class="card">
-      <h2>Proje Özeti</h2>
-      <p>TV+'ın içerik çeşitliliği ve kullanıcı kontrollü ekran deneyimi, premium mecralarda yüksek görünürlük oranı ve etkileşim performansıyla dijital ortama taşındı.</p>
-    </div>
+<nav>
+  <button id="desktopBtn" class="nav-button active" onclick="showDesktop()">Desktop</button>
+  <button id="mobileBtn" class="nav-button" onclick="showMobile()">Mobile</button>
+</nav>
 
-    <div class="card">
-      <h2>Rich Media Banner Tanıtımı</h2>
-      <p>Proje kapsamında geliştirilen dinamik banner ile kullanıcılar içerik kategorileri arasında hızlıca seçim yapabilmektedir.</p>
-    </div>
-
-    <div class="card">
-      <h2>Kategori Sayfa Özetleri</h2>
-      <p>
-        <strong>Film:</strong> Sinema arşivi ve gala filmleri ile zengin içerik deneyimi.<br>
-        <strong>Spor:</strong> Şampiyonlar Ligi ve canlı spor yayını deneyimi.<br>
-        <strong>Belgesel:</strong> Doğa, tarih ve keşif belgeselleriyle dünya turu.<br>
-        <strong>Çocuk:</strong> Eğlenceli ve eğitici çocuk programları.
-      </p>
-    </div>
+<div id="desktopView">
+  <iframe class="desktop-frame" src="TVPlus/TVPlus.html"></iframe>
+  <div class="section">
+    <h2>Proje Özeti</h2>
+    <p>TV+'ın içerik çeşitliliği ve kullanıcı kontrollü ekran deneyimi, premium mecralarda yüksek görünürlük oranı ve etkileşim performansıyla dijital ortama taşındı.</p>
   </div>
+  <div class="section">
+    <h2>Rich Media Banner Tanıtımı</h2>
+    <p>Proje kapsamında geliştirilen dinamik banner ile kullanıcılar içerik kategorileri arasında hızlıca seçim yapabilmektedir.</p>
+  </div>
+  <div class="section">
+    <h2>Kategori Sayfa Özetleri</h2>
+    <ul>
+      <li><b>Film:</b> Sinema arşivi ve gala filmleri ile zengin içerik deneyimi</li>
+      <li><b>Spor:</b> Şampiyonlar Ligi ve canlı spor yayını deneyimi</li>
+      <li><b>Belgesel:</b> Doğa, tarih ve keşif belgeselleriyle dünya turu</li>
+      <li><b>Çocuk:</b> Eğlenceli ve eğitici çocuk programları</li>
+    </ul>
+  </div>
+</div>
 
-  <script>
-    const desktopBtn = document.getElementById('desktopBtn');
-    const mobileBtn = document.getElementById('mobileBtn');
-    const iframeArea = document.getElementById('iframeArea');
+<div id="mobileView" class="hidden">
+  <div class="phone-frame">
+    <img src="Mobile/cerceve_2.png" class="phone-image">
+    <iframe class="phone-screen" src="Mobile/mobile.html"></iframe>
+  </div>
+</div>
 
-    desktopBtn.addEventListener('click', () => {
-      iframeArea.innerHTML = '<iframe src="TVPlus/TVPlus.html" class="desktop-frame"></iframe>';
-      desktopBtn.classList.add('active');
-      mobileBtn.classList.remove('active');
-    });
+<script>
+function showDesktop() {
+  document.getElementById('desktopView').classList.remove('hidden');
+  document.getElementById('mobileView').classList.add('hidden');
+  document.getElementById('desktopBtn').classList.add('active');
+  document.getElementById('mobileBtn').classList.remove('active');
+}
 
-    mobileBtn.addEventListener('click', () => {
-      iframeArea.innerHTML = '<div class="phone-mockup"><iframe src="Mobile/Mobile.html" class="mobile-frame"></iframe></div>';
-      mobileBtn.classList.add('active');
-      desktopBtn.classList.remove('active');
-    });
-  </script>
+function showMobile() {
+  document.getElementById('desktopView').classList.add('hidden');
+  document.getElementById('mobileView').classList.remove('hidden');
+  document.getElementById('desktopBtn').classList.remove('active');
+  document.getElementById('mobileBtn').classList.add('active');
+}
+</script>
+
 </body>
 </html>
